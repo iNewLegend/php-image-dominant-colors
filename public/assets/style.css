@@ -1,0 +1,116 @@
+@import "spinner.css";
+
+.hidden {
+	display: none !important;
+}
+
+.fade-out {
+	animation: fadeOut 5s;
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+#error {
+	background: red;
+	padding: 0 50px;
+	margin: 25px;
+	border: 1px solid black;
+	font-family: monospace;
+}
+
+#main {
+	padding-top: 20vh;
+	text-align: center;
+}
+
+#main #preview {
+	width: 300px;
+	height: 300px;
+	border: 1px dashed black;
+	cursor: pointer;
+}
+
+#main #control-panel {
+	width: 100px;
+	margin: 0 auto;
+	margin-bottom: 10px;
+	display: inline;
+}
+
+#main #control-panel #settings {
+	display: block;
+	margin: 25px;
+	background: #80808029;
+	border-radius: 15px;
+	height: 40px;
+	padding-top: 15px;
+	padding-left: 10px;
+	padding-right: 10px;
+	border: 1px dashed grey;
+}
+
+#main #control-panel #settings label {
+	font-size: 20px;
+	font-weight: 600;
+}
+
+#main #control-panel #settings input {
+	padding: 0;
+	height: 24px;
+	width: 33px;
+	text-align: center;
+}
+
+#main #control-panel #settings #max-colors {
+	display: inline-block;
+	float: right;
+}
+
+#main #control-panel #settings #max-timeout {
+	display: inline-block;
+	float: left;
+}
+
+#main #control-panel #settings #max-timeout input {
+	width: 55px;
+}
+
+#main #control-panel div {
+	display: inline;
+}
+
+#main #control-panel button {
+	font-weight: 700;
+	padding: 5px 10px;
+	cursor: pointer;
+}
+
+#main #control-panel button:hover {
+	color: red;
+}
+
+#main #control-panel hr {
+	margin-top: 15px;
+}
+
+#content .colors-result {
+	padding-top: 20px;
+	margin: 0 auto;
+	width: 30vh;
+	text-align: center;
+}
+
+#content .colors-result .colors-result-item .color-value {
+	text-transform: uppercase;
+}
+
+#content p {
+	text-align: center;
+}
