@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dominant color finder</title>
+
+	<style>
+		@import url("/assets/style.css");
+	</style>
+</head>
+<body>
+
+<pre id="error" class="hidden">
+</pre>
+
+<div id="main">
+	<div class="spinner hidden"></div>
+
+	<div id="control-panel">
+		<section id="settings">
+			<div id="max-colors">
+				<input id="max-colors-input" type="number" max="20" min="1" value="5" maxlength="2" />
+				<label for="max-colors-input">←Max colors</label>
+			</div>
+
+			<div id="max-timeout">
+				<label for="max-timeout-input">Max timeout→</label>
+				<input id="max-timeout-input" type="number" max="99999" min="1" value="20000" maxlength="1000" />
+			</div>
+		</section>
+
+		<div id="clear-image">
+			<button onclick="setDefaultState()">Clear</button>
+		</div>
+
+		<div id="analyze-link">
+			<button onclick="analyzeImage()">Analyze</button>
+		</div>
+
+		<hr />
+	</div>
+
+	<div id="image-input">
+		<h4 id="description">Press on the square to select image.</h4>
+		<label for="file-input">
+			<img id="preview" class="hidden" src="#" alt="Image Preview" title="Click here to select image"/>
+		</label>
+
+		<input id="file-input" class="hidden" type="file" onchange="onPreviewChange()" />
+	</div>
+</div>
+
+<div id="content">
+
+</div>
+
+<template id="colors-result">
+	<hr />
+
+	<table class="colors-result">
+		<thead>
+		<tr>
+			<th>Color</th>
+			<th>Color Value</th>
+			<th>Occurrences rate</th>
+		</tr>
+		</thead>
+		<tbody>
+			<!-- Colors will be added here -->
+		</tbody>
+	</table>
+
+	<p class="usage">{usage}ms</p>
+</template>
+
+<template id="colors-result-item">
+	<tr class="colors-result-item">
+		<td class="color"></td>
+		<td class="color-value">#{color}</td>
+		<td class="percentage">{percentage}%</td>
+	</tr>
+</template>
+
+<script src="/assets/main.js"></script>
+</body>
+</html>
