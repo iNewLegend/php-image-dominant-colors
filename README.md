@@ -3,6 +3,7 @@
 ### Get dominant colors from image.
 
 - PHP Minimum Version: 7.4
+- No frameworks or libraries has been used.
 
 ### Frontend preview
 ![](./docs/preview_1.png)
