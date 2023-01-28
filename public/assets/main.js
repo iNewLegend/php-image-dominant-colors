@@ -1,5 +1,8 @@
+/**
+ * author Leonid Vinikov <leonidvinikov@gmail.com>
+ */
 const CLICK_HERE_IMAGE_URL = '/assets/click-here.jpg',
-	BACKEND_URL = '/backend.php'
+	BACKEND_URL = '/backend.php',
 	DEFAULT_PERCENTAGE_FRAC_DIGITS = 2;
 
 const elements = {
