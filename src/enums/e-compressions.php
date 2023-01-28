@@ -11,8 +11,6 @@ class E_Compressions extends Enum {
 	const E_COMPRESSIONS_BI_RGB = '0';    // No compression - straight BGR data.
 	const E_COMPRESSIONS_BI_RLE8 = '1';   // 8-bit run-length compression.
 	const E_COMPRESSIONS_BI_RLE4 = '2';   // 4-bit run-length compression.
-
-	const __default = self::E_COMPRESSIONS_BI_RGB;
 }
 
 class E_Compressions_Modes extends Enum {

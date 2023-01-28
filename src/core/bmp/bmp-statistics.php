@@ -73,11 +73,11 @@ function get_bmp_colors( Bitmap_File_Reader $file_reader): array {
 
 		case E_Bits_Per_Pixel::E_BPP_24:
 		case E_Bits_Per_Pixel::E_BPP_32:
-			$result = get_colors_rgb_higer_then_24bpp( $file_reader );
+			$result = get_colors_rgb_higher_then_24bpp( $file_reader );
 			break;
 
 		default:
-			throw new Exception( "Unsupported bits per pixel value: '{$bits_per_pixel }'." );
+			throw new Exception( "Unsupported bits per pixel value: '$bits_per_pixel'." );
 	}
 
 	return $result;

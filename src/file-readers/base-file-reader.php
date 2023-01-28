@@ -13,7 +13,7 @@ abstract class Base_File_Reader implements \ArrayAccess {
 
 	private array $file_stats;
 
-	private $file_handler;
+	private mixed $file_handler;
 
 	private Args_Object $args;
 
@@ -30,6 +30,7 @@ abstract class Base_File_Reader implements \ArrayAccess {
 
 		$this->args = new $class_name( $args );
 
+		/** @noinspection PhpConditionAlreadyCheckedInspection */
 		if ( ! ( $this->args instanceof Args_Object ) ) {
 			throw new Exception( 'The class returned by `get_args_class()` must be an instance of `Args_Object`.' );
 		}
@@ -70,7 +71,7 @@ abstract class Base_File_Reader implements \ArrayAccess {
 	}
 
 	#[\ReturnTypeWillChange]
-	public function offsetExists( $offset ) {
+	public function offsetExists( $offset ): bool {
 		$this->ensure_data_get();
 
 		return isset( $this->user_data[ $offset ] );
@@ -97,13 +98,13 @@ abstract class Base_File_Reader implements \ArrayAccess {
 
 	abstract public function read_data(): void;
 
-	protected function read( $length ) {
+	protected function read( $length ): mixed {
 		$this->offset += $length;
 
 		return fread( $this->file_handler, $length );
 	}
 
-	protected function seek( $offset, $whence = SEEK_SET ) {
+	protected function seek( $offset, $whence = SEEK_SET ): int {
 		$this->offset = $offset;
 		return fseek( $this->file_handler, $offset, $whence );
 	}
@@ -154,6 +155,6 @@ abstract class Base_File_Reader implements \ArrayAccess {
 
 	private function method_is_read_only() {
 		$class = static::class;
-		throw new Exception( "'{$class}' is read only'" );
+		throw new Exception( "'$class' is read only'" );
 	}
 }

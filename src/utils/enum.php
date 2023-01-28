@@ -8,7 +8,7 @@ namespace Utils;
 use Exception;
 
 abstract class Enum {
-	private $value;
+	private string $value;
 
 	public function __construct( $value = null ) {
 		if ( null === $value ) {
@@ -37,7 +37,7 @@ abstract class Enum {
 		return $this->value;
 	}
 
-	public function get_as_int() {
+	public function get_as_int(): int {
 		return intval( $this->value );
 	}
 

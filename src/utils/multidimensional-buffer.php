@@ -45,8 +45,11 @@ class Multidimensional_Buffer {
 		return $this->data;
 	}
 
-	public function is_empty() {
-		// TODO: Find better solution.
+	public function is_empty(): bool {
+		if ( empty( $this->data ) ) {
+			return true;
+		}
+
 		$sum = array_reduce( $this->data, function ( $carry, $item ) {
 			return $carry + array_sum( $item );
 		}, 0 );
