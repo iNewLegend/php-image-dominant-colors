@@ -41,7 +41,7 @@ function api_error( $e1 = null, $e2 = null, $e3 = null, $e4 = null ) {
 	exit( json_encode( $error ) );
 }
 
-function errors_to_json() {
+function errors_to_json(): void {
 	set_error_handler( '\Utils\api_error', E_ALL );
 	set_exception_handler( '\Utils\api_error' );
 }

@@ -71,6 +71,8 @@ class RLE8_Decoder extends Base_Decoder {
 
 		$sources_bytes = substr( $this->binary_data, $index, $pixels_length );
 
+		$values = [];
+
 		// Prepare the values.
 		for ( $j = 0; $j < $pixels_length; $j++ ) {
 			$values[] = ord( $sources_bytes[ $j ] );

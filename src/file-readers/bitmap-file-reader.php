@@ -76,7 +76,7 @@ class Bitmap_File_Reader extends Base_File_Reader {
 		$this->width = abs( $this->read_int() );        // biWidth..
 		$this->height = abs( $this->read_int() );       // biHeight.
 
-		$this->planes = $this->read_ushort();         // biPlanes (planes for the target device, this is always 1).
+		$this->planes = $this->read_ushort();           // biPlanes (planes for the target device, this is always 1).
 
 		$this->bits_per_pixel = new E_Bits_Per_Pixel( (string) $this->read_ushort() ); // biBitCount.
 
@@ -186,7 +186,7 @@ class Bitmap_File_Reader extends Base_File_Reader {
 	}
 
 	private function read_colors_palette(): void {
-		// Check bits_per_pixel range. (
+		// Check bits_per_pixel range.
 		if ( $this->bits_per_pixel->less_then( E_Bits_Per_Pixel::E_BPP_24 ) ) {
 			$colors_count = $this->colors_used;
 

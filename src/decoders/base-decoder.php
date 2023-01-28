@@ -78,7 +78,7 @@ abstract class Base_Decoder {
 		$this->binary_offset = 0;
 	}
 
-	protected function get_offset() {
+	protected function get_offset(): int {
 		return $this->binary_offset;
 	}
 

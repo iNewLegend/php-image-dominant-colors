@@ -15,11 +15,11 @@ use File_Readers\Bitmap_File_Reader;
  * No padding, simple one data unit per pixel.
  *
  * @param Bitmap_File_Reader $file_reader
- * @param $data
+ * @param array $data
  *
  * @return array
  */
-function get_colors_simple( Bitmap_File_Reader $file_reader, array $data ) {
+function get_colors_simple( Bitmap_File_Reader $file_reader, array $data ): array {
 	$result = [];
 
 	for( $y = 0; $y < $file_reader['height']; $y++ ) {
@@ -170,7 +170,7 @@ function get_colors_byte_8bpp( Bitmap_File_Reader $file_reader ): array {
  *
  * @return array
  */
-function get_colors_rgb_higer_then_24bpp( Bitmap_File_Reader $file_reader ) {
+function get_colors_rgb_higher_then_24bpp( Bitmap_File_Reader $file_reader ): array {
 	$results = [];
 
 	$bytes_amount = $file_reader['amount'];
@@ -237,7 +237,7 @@ function get_bmp_color( Bitmap_File_Reader $file_reader, mixed $context ): strin
 			break;
 
 		default:
-			throw new Exception( "Unsupported bits per pixel value: '{$bits_per_pixel }'." );
+			throw new Exception( "Unsupported bits per pixel value: '$bits_per_pixel'." );
 	}
 
 

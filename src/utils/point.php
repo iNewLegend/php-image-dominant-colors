@@ -35,11 +35,11 @@ class Point {
 		return $this->y;
 	}
 
-	public function increment_x( $amount = 1 ) {
+	public function increment_x( $amount = 1 ): void {
 		$this->x += $amount;
 	}
 
-	public function increment_y( $amount = 1) {
+	public function increment_y( $amount = 1): void {
 		$this->y += $amount;
 	}
 }

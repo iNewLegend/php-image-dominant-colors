@@ -112,5 +112,6 @@ class RLE4_Decoder extends Base_Decoder {
 			$this->increment_offset( 1 );
 		}
 
-		$this->buffer->push( $values );	}
+		$this->buffer->push( $values );
+	}
 }

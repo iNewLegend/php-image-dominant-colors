@@ -22,7 +22,7 @@ class RGBA {
 	protected int $green = 0;
 	protected int $blue = 0;
 
-	protected $value = '';
+	protected string $value = '';
 
 	public function __construct( int $red, int $green, int $blue, $alpha = null ) {
 		$this->red = $red;
