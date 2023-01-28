@@ -31,4 +31,4 @@ $ ./run
 ## Other documents:
 
 - [Development research](docs/development-research.md)
-- [Bitmaps test suite](docs/bitmap-test-suite.md)
+- [Bitmaps test suite](docs/bitmaps-test-suite.md)
