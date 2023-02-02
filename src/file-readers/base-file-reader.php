@@ -29,11 +29,6 @@ abstract class Base_File_Reader implements \ArrayAccess {
 		$class_name = $this->get_args_class();
 
 		$this->args = new $class_name( $args );
-
-		/** @noinspection PhpConditionAlreadyCheckedInspection */
-		if ( ! ( $this->args instanceof Args_Object ) ) {
-			throw new Exception( 'The class returned by `get_args_class()` must be an instance of `Args_Object`.' );
-		}
 	}
 
 	public function open(): bool {
