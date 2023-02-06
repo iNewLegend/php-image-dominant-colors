@@ -757,6 +757,7 @@ Paletted image with 2 bits/pixel. Usually only 1, 4, and 8 are allowed, but 2 is
 
 ## 8 bit
 * Including RLE8 compression.
+* OS/2 1.x are not supported.
 
 ![](img_7.png)
 

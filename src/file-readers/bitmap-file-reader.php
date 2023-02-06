@@ -196,22 +196,9 @@ class Bitmap_File_Reader extends Base_File_Reader {
 			$is_osx_header = $this->info_header_size === self::OS21X_HEADER_SIZE;
 
 			// For sure OSX header.
+			// TODO: In case of OS/2 will be implemented, its better to reduces the ifs and create new classes.
 			if ( $is_osx_header && $colors_count * self::OS21X_COLORS_SIZE + $osx_header_size_calc > $this->offset ) {
-
-				$calculated_palette_size = intdiv( ( $this->offset - $osx_header_size_calc ), 3 );
-
-				// Ensure that palette size.
-				if ( $calculated_palette_size < $colors_count ) {
-					$colors_count = $calculated_palette_size;
-				}
-
-				for( $i = 0; $i < $colors_count; $i++ ) {
-					$chunk = $this->read_bytes( self::OS21X_COLORS_SIZE );
-
-					$this->colors_palette[] = new RGBA( $chunk[3], $chunk[2], $chunk[1] );
-				}
-
-				return;
+				throw new Exception( 'Invalid BMP file, OS/2 format not supported.' );
 			}
 
 			// Windows header.
