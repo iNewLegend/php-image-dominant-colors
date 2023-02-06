@@ -403,7 +403,7 @@ But when the bitmap including a lot of colors, it's not good enough.
 
 ![](img_2.png)
 
-The issue can be fixed by merging familiar colors into one color.
+The issue can be fixed by merging similar colors into one color.
 
 ---
 
