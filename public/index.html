@@ -22,6 +22,10 @@
 				<label for="max-colors-input">←Max colors</label>
 			</div>
 
+			<div id="colors-sensitivity">
+				<button onclick="setColorSensitivity()">Merge colors sensitivity</button>
+			</div>
+
 			<div id="max-timeout">
 				<label for="max-timeout-input">Max timeout→</label>
 				<input id="max-timeout-input" type="number" max="99999" min="1" value="20000" maxlength="1000" />
@@ -69,11 +73,17 @@
 		</tbody>
 	</table>
 
-	<div class="general-statistics">
+	<div class="statistics general">
 		<p class="load-time">Load time<b>{loadTime}ms</b></p>
 		<p class="displayed-colors">Shown items<b>{displayedColors}</b></p>
 		<p class="total-colors">Total<b>{totalColors}</b></p>
 		<p class="unique-colors">Unique colors<b>{uniqueColors}</b></p>
+	</div>
+
+	<div class="statistics merge hidden">
+		<p class="merged-colors">Total Merged colors<b>{mergedColors}</b></p>
+		<p class="unique-colors">Total unique colors<b>{uniqueColors}</b></p>
+		<p class="sensitivity">Sensitivity percent<b>{sensitivity}%</b></p>
 	</div>
 </template>
 

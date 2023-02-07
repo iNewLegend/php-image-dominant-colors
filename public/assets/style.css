@@ -29,7 +29,7 @@
 }
 
 #main {
-	padding-top: 20vh;
+	padding-top: 10vh;
 	text-align: center;
 }
 
@@ -47,7 +47,6 @@
 	display: inline;
 }
 
-
 #main #control-panel #settings {
 	display: block;
 	margin: 25px auto;
@@ -58,7 +57,7 @@
 	padding-left: 10px;
 	padding-right: 10px;
 	border: 1px dashed grey;
-	width: 600px;
+	width: 700px;
 }
 
 #main #control-panel #settings label {
@@ -120,8 +119,8 @@
 	text-transform: uppercase;
 }
 
-#content .general-statistics {
-	width: 500px;
+#content .statistics {
+	width: 6in;
 	margin: 30px auto;
 	background: #ebebeb;
 	padding: 5px;
@@ -131,14 +130,14 @@
 	display: flex;
 }
 
-#content .general-statistics p {
+#content .statistics p {
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
 	margin: 0 auto;
 }
 
-#content .general-statistics p b {
+#content .statistics p b {
 	text-align: center;
 	padding-top: 10px;
 }

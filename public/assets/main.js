@@ -19,6 +19,7 @@ const elements = {
 
 			settings: {
 				maxColorsInput: document.getElementById( "max-colors-input" ),
+				colorsSensitivity: document.getElementById( "colors-sensitivity" ),
 				maxTimeoutInput: document.getElementById( "max-timeout-input" ),
 			}
 		},
@@ -37,6 +38,8 @@ const elements = {
 		colorsResultItem: document.getElementById( 'colors-result-item' ),
 	}
 };
+
+let gColorsSensitivityMerge = '0.00';
 
 /**
  * Preview the image, before sending analyze request.
@@ -99,6 +102,19 @@ function setControlPanelState( state ) {
 
 	// Disable the file input.
 	elements.main.imageInput.fileInput.disabled = state;
+}
+
+/**
+ * Set the colors sensitivity merge value.
+ */
+function setColorSensitivity() {
+	let text = 'Enter the color sensitivity percent ( Default 0, Minimum :0.01, Maximum: 100 )';
+
+	if ( '0.00' === gColorsSensitivityMerge ) {
+		text += '\nHigher means more colors, lower means less colors.';
+	}
+
+	gColorsSensitivityMerge = prompt( text, gColorsSensitivityMerge );
 }
 
 /**
@@ -204,10 +220,11 @@ function createColorsResult( result ) {
 		tableBodyEl.appendChild( itemEl );
 	} );
 
-	const loadTime = template.querySelector('.load-time'),
-		displayedColors = template.querySelector('.displayed-colors'),
-		totalColors = template.querySelector('.total-colors'),
-		uniquesColors = template.querySelector('.unique-colors'),
+	const generalEl = template.querySelector( '.statistics.general' );
+		loadTime = generalEl.querySelector('.load-time'),
+		displayedColors = generalEl.querySelector('.displayed-colors'),
+		totalColors = generalEl.querySelector('.total-colors'),
+		uniquesColors = generalEl.querySelector('.unique-colors'),
 		{ load_time, displayed_colors_count, total_colors_count, unique_colors_count } = result;
 
 	loadTime.innerHTML = loadTime.innerHTML.replace(
@@ -218,6 +235,20 @@ function createColorsResult( result ) {
 	displayedColors.innerHTML = displayedColors.innerHTML.replace( '{displayedColors}', displayed_colors_count );
 	totalColors.innerHTML = totalColors.innerHTML.replace( '{totalColors}', total_colors_count );
 	uniquesColors.innerHTML = uniquesColors.innerHTML.replace( '{uniqueColors}', unique_colors_count );
+
+	if ( result.merge ) {
+		const mergeEl = template.querySelector( '.statistics.merge' ),
+			totalColors = mergeEl.querySelector( '.merged-colors' ),
+			uniquesColors = mergeEl.querySelector( '.unique-colors' ),
+			sensitivity = mergeEl.querySelector( '.sensitivity' ),
+			{ total_colors_count, unique_colors_count } = result.merge;
+
+		totalColors.innerHTML = totalColors.innerHTML.replace( '{mergedColors}', total_colors_count );
+		uniquesColors.innerHTML = uniquesColors.innerHTML.replace( '{uniqueColors}', unique_colors_count );
+		sensitivity.innerHTML = sensitivity.innerHTML.replace( '{sensitivity}', gColorsSensitivityMerge );
+
+		mergeEl.classList.remove( 'hidden' );
+	}
 
 	content.appendChild( template );
 }
@@ -232,6 +263,7 @@ async function analyzeImage() {
 
 	formData.append( 'file', elements.main.imageInput.fileInput.files[ 0 ] );
 	formData.append( 'max_colors', parseInt( elements.main.controlPanel.settings.maxColorsInput.value ) );
+	formData.append( 'colors_sensitivity_merge', gColorsSensitivityMerge );
 
 	// Using fetch API to send the image to the server.
 	const result = await sendAnalyzeRequest( formData );
