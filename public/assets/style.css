@@ -119,15 +119,24 @@
 	text-transform: uppercase;
 }
 
-#content .statistics {
+#content .statistics section {
 	width: 6in;
-	margin: 30px auto;
 	background: #ebebeb;
-	padding: 5px;
 	border-radius: 20px;
 	font-family: monospace;
 	border: 1px solid #bfbcbc;
 	display: flex;
+	padding: 20px 5px 5px;
+	margin: 0 auto;
+}
+
+#content .statistics header {
+	text-align: center;
+	position: relative;
+	top: 45px;
+	color: #676767;
+	text-shadow: 0 0 black;
+	font-weight: bolder;
 }
 
 #content .statistics p {
