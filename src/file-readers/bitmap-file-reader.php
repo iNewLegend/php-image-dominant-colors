@@ -207,7 +207,7 @@ class Bitmap_File_Reader extends Base_File_Reader {
 			for( $i = 0; $i < $colors_count; $i++ ) {
 				$chunk = $this->read_bytes( self::WINDOWS_COLORS_SIZE );
 
-				$this->colors_palette[] = new RGBA( $chunk[3], $chunk[2], $chunk[1] );
+				$this->colors_palette[] = RGBA::create_from_unitis( $chunk[3], $chunk[2], $chunk[1] );
 			}
 
 			if ( $colors_count * self::WINDOWS_COLORS_SIZE + $win_header_size_calc >  $this->offset ) {

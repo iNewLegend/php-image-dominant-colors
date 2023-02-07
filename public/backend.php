@@ -17,18 +17,22 @@ function get_file_statistics( Base_File_Reader $file_reader ): array {
 		'message' => 'Failed to get file statistics',
 	];
 
-	$max_colors = $_POST['user'] ?? intval( $_POST['max_colors'] );
+	$args = [
+		'max_colors' => 0,
+		'colors_sensitivity_merge' => 0,
+	];
+
+	$args = array_merge( $args, $_POST );
 
 	switch ( $file_reader->get_file_extension() ) {
 		case 'bmp':
-			$result = get_bmp_statistics( $file_reader, $max_colors );
+			$result = get_bmp_statistics( $file_reader, $args );
 			break;
 
 		default:
 			$result['message'] = 'Unsupported file type: ' . $file_reader->get_file_extension();
 			break;
 	}
-
 
 	return $result;
 }

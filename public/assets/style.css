@@ -29,7 +29,6 @@
 }
 
 #main {
-	padding-top: 20vh;
 	text-align: center;
 }
 
@@ -47,7 +46,6 @@
 	display: inline;
 }
 
-
 #main #control-panel #settings {
 	display: block;
 	margin: 25px auto;
@@ -58,7 +56,7 @@
 	padding-left: 10px;
 	padding-right: 10px;
 	border: 1px dashed grey;
-	width: 600px;
+	width: 700px;
 }
 
 #main #control-panel #settings label {
@@ -120,25 +118,34 @@
 	text-transform: uppercase;
 }
 
-#content .general-statistics {
-	width: 500px;
-	margin: 30px auto;
+#content .statistics section {
+	width: 6in;
 	background: #ebebeb;
-	padding: 5px;
 	border-radius: 20px;
 	font-family: monospace;
 	border: 1px solid #bfbcbc;
 	display: flex;
+	padding: 20px 5px 5px;
+	margin: 0 auto;
 }
 
-#content .general-statistics p {
+#content .statistics header {
+	text-align: center;
+	position: relative;
+	top: 45px;
+	color: #676767;
+	text-shadow: 0 0 black;
+	font-weight: bolder;
+}
+
+#content .statistics p {
 	display: flex;
 	flex-direction: column;
 	padding: 10px;
 	margin: 0 auto;
 }
 
-#content .general-statistics p b {
+#content .statistics p b {
 	text-align: center;
 	padding-top: 10px;
 }
