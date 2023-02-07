@@ -10,7 +10,17 @@ use File_Readers\Bitmap_File_Reader;
 
 const MAX_COLORS_OCCURRENCE = 20;
 
-function get_merged_colors_by_sensitivity( $sensitivity, &$colors_target ): int {
+/**
+ * Function get_merged_colors_by_sensitivity.
+ *
+ * Replace similar colors with an average color by sensitivity.
+ *
+ * @param float $sensitivity (0.0 - 100.0)
+ * @param array $colors_target
+ *
+ * @return int Total colors merged.
+ */
+function get_merged_colors_by_sensitivity( float $sensitivity, array &$colors_target ): int {
 	$result = 0;
 
 	$unique_colors = array_unique( $colors_target, SORT_REGULAR );
@@ -73,7 +83,7 @@ function get_merged_colors_by_sensitivity( $sensitivity, &$colors_target ): int 
  * Return array of statistics for given bitmap file.
  *
  * @param Bitmap_File_Reader $file_reader
- * @param array              $args
+ * @param array $args
  *
  * @return array
  */
