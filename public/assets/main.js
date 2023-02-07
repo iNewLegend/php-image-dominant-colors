@@ -204,17 +204,20 @@ function createColorsResult( result ) {
 		tableBodyEl.appendChild( itemEl );
 	} );
 
-	const usageEl = template.querySelector('.usage'),
-		itemsEl = template.querySelector('.items');
+	const loadTime = template.querySelector('.load-time'),
+		displayedColors = template.querySelector('.displayed-colors'),
+		totalColors = template.querySelector('.total-colors'),
+		uniquesColors = template.querySelector('.unique-colors'),
+		{ load_time, displayed_colors_count, total_colors_count, unique_colors_count } = result;
 
-	usageEl.innerHTML = usageEl.innerHTML.replace(
-		'{usage}',
-		result.usage.toFixed( DEFAULT_PERCENTAGE_FRAC_DIGITS )
+	loadTime.innerHTML = loadTime.innerHTML.replace(
+		'{loadTime}',
+		load_time.toFixed( DEFAULT_PERCENTAGE_FRAC_DIGITS )
 	);
 
-	// Can be achived with one `replace()`.
-	itemsEl.innerHTML = itemsEl.innerHTML.replace( '{items}', result.items );
-	itemsEl.innerHTML = itemsEl.innerHTML.replace( '{total}', result.total );
+	displayedColors.innerHTML = displayedColors.innerHTML.replace( '{displayedColors}', displayed_colors_count );
+	totalColors.innerHTML = totalColors.innerHTML.replace( '{totalColors}', total_colors_count );
+	uniquesColors.innerHTML = uniquesColors.innerHTML.replace( '{uniqueColors}', unique_colors_count );
 
 	content.appendChild( template );
 }

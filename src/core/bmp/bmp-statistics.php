@@ -102,12 +102,18 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, $max_colors ): arr
 	];
 
 	$stack = [];
-	$total = 0;
+	$total_colors_count = 0;
 
 	$file_reader->get_data();
 
 	$colors = get_bmp_colors( $file_reader );
 
+	$unique_colors_count = count( array_unique( $colors ) );
+
+	// Free memory.
+	unset( $file_reader );
+
+	// Set occurrence for each color.
 	foreach ( $colors as $color ) {
 		// '_' is used to avoid 'exculpation' for numerical keys, eg, '000000' will become '0', etc...
 		$color = '_' . $color;
@@ -117,11 +123,11 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, $max_colors ): arr
 		}
 
 		$stack[ $color ]++;
-		$total++;
+		$total_colors_count++;
 	}
 
-	// Free some memory.
-	unset( $file_reader );
+	// Free memory.
+	unset( $colors );
 
 	// Sort by value.
 	asort( $stack );
@@ -135,8 +141,8 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, $max_colors ): arr
 	$stack = array_slice( $stack, 0, $max_colors, true );
 
 	// Calculate percentage.
-	$percentage = array_map( function ( $value ) use ( $total ) {
-		return ( $value / $total ) * 100;
+	$percentage = array_map( function ( $value ) use ( $total_colors_count ) {
+		return ( $value / $total_colors_count ) * 100;
 	}, $stack );
 
 	$statistics = [];
@@ -153,9 +159,11 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, $max_colors ): arr
 	if ( ! empty( $stack ) ) {
 		$result = [
 			'success' => true,
-			'total' => $total,
 			'statistics' => $statistics,
-			'usage' => microtime( true ) - $time_start,
+			'total_colors_count' => $total_colors_count,
+			'unique_colors_count' => $unique_colors_count,
+			'displayed_colors_count' => count( $stack ),
+			'load_time' => microtime( true ) - $time_start,
 		];
 	}
 

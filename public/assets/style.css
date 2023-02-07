@@ -47,6 +47,7 @@
 	display: inline;
 }
 
+
 #main #control-panel #settings {
 	display: block;
 	margin: 25px auto;
@@ -57,7 +58,7 @@
 	padding-left: 10px;
 	padding-right: 10px;
 	border: 1px dashed grey;
-	width: 500px;
+	width: 600px;
 }
 
 #main #control-panel #settings label {
@@ -70,6 +71,10 @@
 	height: 24px;
 	width: 33px;
 	text-align: center;
+}
+
+#main #control-panel #settings div {
+	min-width: 200px;
 }
 
 #main #control-panel #settings #max-colors {
@@ -115,6 +120,25 @@
 	text-transform: uppercase;
 }
 
-#content p {
+#content .general-statistics {
+	width: 500px;
+	margin: 30px auto;
+	background: #ebebeb;
+	padding: 5px;
+	border-radius: 20px;
+	font-family: monospace;
+	border: 1px solid #bfbcbc;
+	display: flex;
+}
+
+#content .general-statistics p {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	margin: 0 auto;
+}
+
+#content .general-statistics p b {
 	text-align: center;
+	padding-top: 10px;
 }
