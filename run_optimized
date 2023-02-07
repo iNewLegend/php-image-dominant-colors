@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Copy the `php.ini` from current php cli.
+cp -f php.ini-production /tmp/php.ini
+
+# Append `custom.php`.ini into `php.ini`
+cat custom.php.ini >> /tmp/php.ini
+
+# Run server with the appended `php.ini`
+php -c /tmp/php.ini -S localhost:8000 -t public

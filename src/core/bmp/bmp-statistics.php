@@ -16,16 +16,16 @@ const MAX_COLORS_OCCURRENCE = 20;
  * Replace similar colors with an average color by sensitivity.
  *
  * @param float $sensitivity (0.0 - 100.0)
- * @param array $colors_target
+ * @param array $colors
  *
- * @return int Total colors merged.
+ * @return array
  */
-function get_merged_colors_by_sensitivity( float $sensitivity, array &$colors_target ): int {
-	$result = 0;
+function get_merged_colors_by_sensitivity( float $sensitivity, array $colors ): array {
+	$result = [];
 
-	$unique_colors = array_unique( $colors_target, SORT_REGULAR );
+	$unique_colors = array_unique( $colors, SORT_REGULAR );
 
-	asort( $colors_target );
+	asort( $colors );
 
 	$done = false;
 
@@ -48,19 +48,15 @@ function get_merged_colors_by_sensitivity( float $sensitivity, array &$colors_ta
 				$distance_percent = $color1_instance->get_distance_percent_to( $color2_instance );
 
 				if ( $distance_percent + $sensitivity > 100 ) {
-					$avg_color = $color1_instance->get_average_to( $color2_instance );
+					$color_avg = $color1_instance->get_average_to( $color2_instance )->get_as_hex();
 
-					$unique_colors = array_diff( $unique_colors, [ $color1, $color2, $avg_color ] );
+					$unique_colors = array_diff( $unique_colors, [ $color1, $color2, $color_avg ] );
 
-					$colors_count = count( $colors_target );
-
-					$colors_target = array_diff( $colors_target, [ $color1, $color2, $avg_color ] );
-
-					$remainder_colors_count = $colors_count - count( $colors_target );
-
-					$result += $remainder_colors_count;
-
-					$colors_target = array_merge( $colors_target, array_fill( 0, $remainder_colors_count, $avg_color ) );
+					$result[] = [
+						'color_1' => $color1,
+						'color_2' => $color2,
+						'color_avg' => $color_avg,
+					];
 
 					break 2;
 				}
@@ -108,7 +104,27 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, array $args ): arr
 	unset( $file_reader );
 
 	if ( ! empty( $args['colors_sensitivity_merge'] ) && ( $colors_sensitivity_merge = floatval( $args['colors_sensitivity_merge'] ) ) >= 0.1 ) {
-		$total_merged_colors = get_merged_colors_by_sensitivity( $colors_sensitivity_merge, $colors );
+		$data = get_merged_colors_by_sensitivity( $colors_sensitivity_merge, $colors );
+
+		$total_merged_colors = 0;
+		foreach ( $data as $item ) {
+			$color_avg = '_' . $item['color_avg'];
+
+			foreach ( $colors as $key => $color ) {
+				if ( $color === $item['color_1'] || $color === $item['color_2'] ) {
+					unset( $colors[ $key ] );
+
+					if ( ! isset( $stack[ $color_avg ] ) ) {
+						$stack[ $color_avg ] = 0;
+					}
+
+					$stack[ $color_avg ]++;
+					$total_colors_count++;
+					$total_merged_colors++;
+				}
+			}
+		}
+
 	}
 
 	foreach ( $colors as $color ) {
