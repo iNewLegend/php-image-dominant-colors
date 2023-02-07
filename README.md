@@ -26,7 +26,7 @@ cd php-image-dominant-colors
 $ ./run
 ```
 
-- Go to http://localhost:8080 to reach the frontend.
+- Go to http://localhost:8000 to reach the frontend.
 
 ## Other documents:
 
