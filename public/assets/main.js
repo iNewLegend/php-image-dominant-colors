@@ -204,12 +204,17 @@ function createColorsResult( result ) {
 		tableBodyEl.appendChild( itemEl );
 	} );
 
-	const usageEl = template.querySelector('.usage');
+	const usageEl = template.querySelector('.usage'),
+		itemsEl = template.querySelector('.items');
 
 	usageEl.innerHTML = usageEl.innerHTML.replace(
 		'{usage}',
 		result.usage.toFixed( DEFAULT_PERCENTAGE_FRAC_DIGITS )
 	);
+
+	// Can be achived with one `replace()`.
+	itemsEl.innerHTML = itemsEl.innerHTML.replace( '{items}', result.items );
+	itemsEl.innerHTML = itemsEl.innerHTML.replace( '{total}', result.total );
 
 	content.appendChild( template );
 }
