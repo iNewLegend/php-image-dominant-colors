@@ -23,52 +23,76 @@ const MAX_COLORS_OCCURRENCE = 20;
 function get_merged_colors_by_sensitivity( float $sensitivity, array $colors ): array {
 	$result = [];
 
-	$unique_colors = array_unique( $colors, SORT_REGULAR );
+	$colors_instance_table = [];
 
 	asort( $colors );
 
-	$done = false;
+	$unique_colors = array_unique( $colors, SORT_REGULAR );
+	$unique_colors = array_values( $unique_colors );
 
-	do {
-		$prev_count = count( $unique_colors );
+	$i1 = 0;
+	$i2 = 1;
 
-		if ( $prev_count <= 2 ) {
-			break;
+	$unique_initial_count = count( $unique_colors );
+
+	while ( $i1 !== $unique_initial_count ) {
+		if ( $i1 === $i2 ) {
+			$i2++;
+			continue;
 		}
 
-		foreach ( $unique_colors as $color1 ) {
-			foreach ( $unique_colors as $color2 ) {
-				if ( $color1 === $color2 ) {
-					continue;
-				}
-
-				$color1_instance = RGBA::create_from_hex( $color1 );
-				$color2_instance = RGBA::create_from_hex( $color2 );
-
-				$distance_percent = $color1_instance->get_distance_percent_to( $color2_instance );
-
-				if ( $distance_percent + $sensitivity > 100 ) {
-					$color_avg = $color1_instance->get_average_to( $color2_instance )->get_as_hex();
-
-					$unique_colors = array_diff( $unique_colors, [ $color1, $color2, $color_avg ] );
-
-					$result[] = [
-						'color_1' => $color1,
-						'color_2' => $color2,
-						'color_avg' => $color_avg,
-					];
-
-					break 2;
-				}
-			}
+		if ( $i2 === $unique_initial_count ) {
+			$i2 = 0;
+			$i1++;
+			continue;
 		}
 
-		$current_count = count( $unique_colors );
-
-		if ( $prev_count === $current_count ) {
-			$done = true;
+		if ( empty( $unique_colors[ $i2 ] ) ) {
+			$i2++;
+			continue;
 		}
-	} while ( ! $done );
+
+		if ( empty( $unique_colors[ $i1 ] ) ) {
+			$i1++;
+			continue;
+		}
+
+		$color_1 = $unique_colors[ $i1 ];
+		$color_2 = $unique_colors[ $i2 ];
+
+		if ( isset( $colors_instance_table[ $color_1 ] ) ) {
+			$color_1_instance = $colors_instance_table[ $color_1 ];
+		} else {
+			$color1_instance = RGBA::create_from_hex( $color_1 );
+			$colors_instance_table[ $color_1 ] = $color1_instance;
+		}
+
+		if ( isset( $colors_instance_table[ $color_2 ] ) ) {
+			$color_2_instance = $colors_instance_table[ $color_2 ];
+		} else {
+			$color2_instance = RGBA::create_from_hex( $color_2 );
+			$colors_instance_table[ $color_2 ] = $color2_instance;
+		}
+
+		$distance_percent = $color1_instance->get_distance_percent_to( $color2_instance );
+
+		if ( $distance_percent > $sensitivity ) {
+			$color_avg = $color1_instance->get_average_to( $color2_instance )->get_as_hex();
+
+			$i1++;
+			$i2++;
+
+			$result[] = [
+				'color_1' => $color_1,
+				'color_2' => $color_2,
+				'color_avg' => $color_avg,
+			];
+
+			continue;
+		}
+
+		$i2++;
+	}
 
 	return $result;
 }
@@ -79,7 +103,7 @@ function get_merged_colors_by_sensitivity( float $sensitivity, array $colors ): 
  * Return array of statistics for given bitmap file.
  *
  * @param Bitmap_File_Reader $file_reader
- * @param array $args
+ * @param array              $args
  *
  * @return array
  */
@@ -111,7 +135,7 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, array $args ): arr
 			$color_avg = '_' . $item['color_avg'];
 
 			foreach ( $colors as $key => $color ) {
-				if ( $color === $item['color_1'] || $color === $item['color_2'] ) {
+				if ( $color === $item['color_1'] || $color === $item['color_2']  ) {
 					unset( $colors[ $key ] );
 
 					if ( ! isset( $stack[ $color_avg ] ) ) {
@@ -124,7 +148,6 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, array $args ): arr
 				}
 			}
 		}
-
 	}
 
 	foreach ( $colors as $color ) {
