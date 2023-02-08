@@ -35,7 +35,7 @@ function get_merged_colors_by_sensitivity( float $sensitivity, array $colors ): 
 
 	$unique_initial_count = count( $unique_colors );
 
-	while ( $i1 !== $unique_initial_count ) {
+	while ( $i1 !== $unique_initial_count && $i2 !== $unique_initial_count ) {
 		if ( $i1 === $i2 ) {
 			$i2++;
 			continue;
@@ -60,23 +60,20 @@ function get_merged_colors_by_sensitivity( float $sensitivity, array $colors ): 
 		$color_1 = $unique_colors[ $i1 ];
 		$color_2 = $unique_colors[ $i2 ];
 
-		if ( isset( $colors_instance_table[ $color_1 ] ) ) {
-			$color_1_instance = $colors_instance_table[ $color_1 ];
-		} else {
-			$color1_instance = RGBA::create_from_hex( $color_1 );
-			$colors_instance_table[ $color_1 ] = $color1_instance;
+		if ( ! isset( $colors_instance_table[ $color_1 ] ) ) {
+			$colors_instance_table[ $color_1 ] = RGBA::create_from_hex( $color_1 );
 		}
 
-		if ( isset( $colors_instance_table[ $color_2 ] ) ) {
-			$color_2_instance = $colors_instance_table[ $color_2 ];
-		} else {
-			$color2_instance = RGBA::create_from_hex( $color_2 );
-			$colors_instance_table[ $color_2 ] = $color2_instance;
+		if ( ! isset( $colors_instance_table[ $color_2 ] ) ) {
+			$colors_instance_table[ $color_2 ] = RGBA::create_from_hex( $color_2 );
 		}
+
+		$color1_instance = $colors_instance_table[ $color_1 ];
+		$color2_instance = $colors_instance_table[ $color_2 ];
 
 		$distance_percent = $color1_instance->get_distance_percent_to( $color2_instance );
 
-		if ( $distance_percent > $sensitivity ) {
+		if ( ( $sensitivity + 1 ) > $distance_percent  ) {
 			$color_avg = $color1_instance->get_average_to( $color2_instance )->get_as_hex();
 
 			$i1++;
@@ -131,22 +128,22 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, array $args ): arr
 		$data = get_merged_colors_by_sensitivity( $colors_sensitivity_merge, $colors );
 
 		$total_merged_colors = 0;
+
 		foreach ( $data as $item ) {
 			$color_avg = '_' . $item['color_avg'];
+			$new_colors = array_diff( $colors, [ $item['color_1'], $item['color_2'], $item['color_avg'] ] );
 
-			foreach ( $colors as $key => $color ) {
-				if ( $color === $item['color_1'] || $color === $item['color_2']  ) {
-					unset( $colors[ $key ] );
+			$colors_added = count( $colors ) - count( $new_colors );
 
-					if ( ! isset( $stack[ $color_avg ] ) ) {
-						$stack[ $color_avg ] = 0;
-					}
+			$colors = $new_colors;
 
-					$stack[ $color_avg ]++;
-					$total_colors_count++;
-					$total_merged_colors++;
-				}
+			if ( ! isset( $stack[ $color_avg ] ) ) {
+				$stack[ $color_avg ] = 0;
 			}
+
+			$stack[ $color_avg ] += $colors_added;
+			$total_colors_count += $colors_added;
+			$total_merged_colors += $colors_added;
 		}
 	}
 
