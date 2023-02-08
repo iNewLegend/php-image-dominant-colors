@@ -7,6 +7,7 @@ namespace Core\BMP;
 
 use Color_Utils\RGBA;
 use File_Readers\Bitmap_File_Reader;
+use Utils\Array_Utils;
 
 const MAX_COLORS_OCCURRENCE = 20;
 
@@ -23,42 +24,31 @@ const MAX_COLORS_OCCURRENCE = 20;
 function get_merged_colors_by_sensitivity( float $sensitivity, array $colors ): array {
 	$result = [];
 
+	$colors_count = count( $colors );
+
 	$colors_instance_table = [];
-
-	asort( $colors );
-
-	$unique_colors = array_unique( $colors, SORT_REGULAR );
-	$unique_colors = array_values( $unique_colors );
 
 	$i1 = 0;
 	$i2 = 1;
 
-	$unique_initial_count = count( $unique_colors );
-
-	while ( $i1 !== $unique_initial_count && $i2 !== $unique_initial_count ) {
+	while ( $i1 !== $colors_count && $i2 !== $colors_count ) {
 		if ( $i1 === $i2 ) {
 			$i2++;
 			continue;
 		}
 
-		if ( $i2 === $unique_initial_count ) {
-			$i2 = 0;
-			$i1++;
-			continue;
-		}
-
-		if ( empty( $unique_colors[ $i2 ] ) ) {
+		if ( empty( $colors[ $i2 ] ) ) {
 			$i2++;
 			continue;
 		}
 
-		if ( empty( $unique_colors[ $i1 ] ) ) {
+		if ( empty( $colors[ $i1 ] ) ) {
 			$i1++;
 			continue;
 		}
 
-		$color_1 = $unique_colors[ $i1 ];
-		$color_2 = $unique_colors[ $i2 ];
+		$color_1 = $colors[ $i1 ];
+		$color_2 = $colors[ $i2 ];
 
 		if ( ! isset( $colors_instance_table[ $color_1 ] ) ) {
 			$colors_instance_table[ $color_1 ] = RGBA::create_from_hex( $color_1 );
@@ -73,7 +63,7 @@ function get_merged_colors_by_sensitivity( float $sensitivity, array $colors ): 
 
 		$distance_percent = $color1_instance->get_distance_percent_to( $color2_instance );
 
-		if ( ( $sensitivity + 1 ) > $distance_percent  ) {
+		if ( ( $sensitivity + 1 ) > $distance_percent ) {
 			$color_avg = $color1_instance->get_average_to( $color2_instance )->get_as_hex();
 
 			$i1++;
@@ -119,35 +109,19 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, array $args ): arr
 
 	$colors = get_bmp_colors( $file_reader );
 
-	$initial_unique_colors_count = count( array_unique( $colors, SORT_REGULAR ) );
-
 	// Free memory.
 	unset( $file_reader );
 
-	if ( ! empty( $args['colors_sensitivity_merge'] ) && ( $colors_sensitivity_merge = floatval( $args['colors_sensitivity_merge'] ) ) >= 0.1 ) {
-		$data = get_merged_colors_by_sensitivity( $colors_sensitivity_merge, $colors );
+	asort( $colors );
 
-		$total_merged_colors = 0;
+	$colors_unique_amount = Array_Utils::array_keys_as_values_unique_count( $colors );
 
-		foreach ( $data as $item ) {
-			$color_avg = '_' . $item['color_avg'];
-			$new_colors = array_diff( $colors, [ $item['color_1'], $item['color_2'], $item['color_avg'] ] );
+	$initial_unique_colors_count = count( $colors_unique_amount );
 
-			$colors_added = count( $colors ) - count( $new_colors );
+	// Free memory.
+	unset( $colors );
 
-			$colors = $new_colors;
-
-			if ( ! isset( $stack[ $color_avg ] ) ) {
-				$stack[ $color_avg ] = 0;
-			}
-
-			$stack[ $color_avg ] += $colors_added;
-			$total_colors_count += $colors_added;
-			$total_merged_colors += $colors_added;
-		}
-	}
-
-	foreach ( $colors as $color ) {
+	$push_color_to_stack = function ( $color, $amount = 1 ) use ( &$stack, &$total_colors_count ) {
 		// '_' is used to avoid 'exculpation' for numerical keys, eg, '000000' will become '0', etc...
 		$color = '_' . $color;
 
@@ -155,8 +129,40 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, array $args ): arr
 			$stack[ $color ] = 0;
 		}
 
-		$stack[ $color ]++;
-		$total_colors_count++;
+		$stack[ $color ] += $amount;
+		$total_colors_count += $amount;
+	};
+
+	$colors_merge_sensitivity = ! empty( $args['colors_merge_sensitivity'] ) ? (float) $args['colors_merge_sensitivity'] : 0.0;
+
+	if ( $colors_merge_sensitivity ) {
+		$merged_colors = get_merged_colors_by_sensitivity( $colors_merge_sensitivity, array_keys( $colors_unique_amount ) );
+
+		$total_merged_colors = 0;
+		$total_unique_colors = $initial_unique_colors_count;
+
+		foreach ( $merged_colors as $item ) {
+			$merged_amount = 0;
+
+			if ( ! isset( $colors_unique_amount[ $item['color_avg'] ] ) ) {
+				$colors_unique_amount[ $item['color_avg'] ] = 0;
+			}
+
+			$merged_amount += $colors_unique_amount[ $item['color_1'] ];
+			$merged_amount += $colors_unique_amount[ $item['color_2'] ];
+			$merged_amount += $colors_unique_amount[ $item['color_avg'] ];
+
+			$colors_unique_amount[ $item['color_1'] ] = 0;
+			$colors_unique_amount[ $item['color_2'] ] = 0;
+			$colors_unique_amount[ $item['color_avg'] ] += $merged_amount;
+
+			$total_merged_colors += 1;
+			$total_unique_colors -= 1;
+		}
+	}
+
+	foreach ( $colors_unique_amount as $color => $amount ) {
+		$push_color_to_stack( $color, $amount );
 	}
 
 	// Sort by value.
@@ -198,10 +204,10 @@ function get_bmp_statistics( Bitmap_File_Reader $file_reader, array $args ): arr
 			'load_time' => microtime( true ) - $time_start,
 		];
 
-		if ( ! empty( $total_merged_colors ) ) {
+		if ( ! empty( $total_merged_colors ) && ! empty( $total_unique_colors ) ) {
 			$result['merge'] = [
 				'total_colors_count' => $total_merged_colors,
-				'unique_colors_count' => count( array_unique( $colors, SORT_REGULAR ) ),
+				'unique_colors_count' => $total_unique_colors
 			];
 		}
 	}
