@@ -7,7 +7,16 @@ namespace Utils;
 
 class Array_Utils {
 
-	public static function array_keys_as_values_unique_count( $array ) {
+	/**
+	 * Function array_keys_as_values_unique_count().
+	 *
+	 * Make array with keys as values and count of each value as value.
+	 *
+	 * @param $array
+	 *
+	 * @return array
+	 */
+	public static function array_keys_as_values_unique_count( $array ): array {
 		$result = [];
 
 		foreach ( $array as $item ) {
