@@ -28,6 +28,15 @@ $ ./run
 
 - Go to http://localhost:8000 to reach the frontend.
 
+---
+
+- In cast you need performance, you can use
+```shell
+$ ./run_optimized
+```
+
+
+
 ## Other documents:
 
 - [Development research](docs/development-research.md)
