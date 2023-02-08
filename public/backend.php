@@ -19,7 +19,7 @@ function get_file_statistics( Base_File_Reader $file_reader ): array {
 
 	$args = [
 		'max_colors' => 0,
-		'colors_sensitivity_merge' => 0,
+		'colors_merge_sensitivity' => 0,
 	];
 
 	$args = array_merge( $args, $_POST );

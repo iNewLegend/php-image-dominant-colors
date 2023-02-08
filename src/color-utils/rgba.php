@@ -101,7 +101,7 @@ class RGBA {
 		$b2 = $rgba->blue;
 		$a2 = $rgba->alpha;
 
-		if ( $a1 && $a2 ) {
+		if ( $a1 || $a2 ) {
 			return sqrt(
 				pow( $r2 - $r1, 2 ) +
 				pow( $g2 - $g1, 2 ) +
