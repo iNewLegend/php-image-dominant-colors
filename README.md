@@ -16,12 +16,12 @@ Clone the repo
 git clone https://github.com/iNewLegend/php-image-dominant-colors
 ```
 
-Enter the folder
+Enter the folder:
 ```shell
 cd php-image-dominant-colors
 ```
 
-- Run development server:
+Run development server:
 ```shell
 $ ./run
 ```
