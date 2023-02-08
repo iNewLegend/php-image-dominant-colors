@@ -6,7 +6,7 @@ PHPSysConfig=`php -i | grep /php.ini | awk '{print $5}'`;
 cp -f $PHPSysConfig /tmp/php.ini
 
 # Append `custom.php`.ini into `php.ini`
-cat custom.php.ini >> /tmp/php.ini
+cat env/custom.php.ini >> /tmp/php.ini
 
 # Run server with the appended `php.ini`
 php -c /tmp/php.ini -S localhost:8000 -t public
