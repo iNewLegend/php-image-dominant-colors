@@ -1,0 +1,56 @@
+name: PHPUnit
+
+on: [ push, pull_request ]
+
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+jobs:
+  file-diff:
+    runs-on: ubuntu-20.04
+    name: File Diff
+    outputs:
+      php_diff: ${{ steps.php_diff_files.outputs.diff }}
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Check PHP files diff
+        id: php_diff_files
+        uses: technote-space/get-diff-action@v6
+        with:
+          PATTERNS: |
+            **/*.php
+            composer.+(json|lock)
+            .github/**/*.yml
+  test:
+    runs-on: ubuntu-20.04
+    needs: [ 'file-diff' ]
+    if: ${{ needs.file-diff.outputs.php_diff }}
+    strategy:
+      fail-fast: false
+      matrix:
+        php_versions: [ '8.1', '8.2 ']
+    name: PHPUnit - PHP ${{ matrix.php_versions }}
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php_versions }}
+      - name: Run Tests
+        run:
+          composer update --no-interaction
+          composer run test
+  test-result:
+    needs: test
+    if: ${{ always() }}
+    runs-on: ubuntu-20.04
+    name: PHPUnit - Test Results
+    steps:
+      - name: Test status
+        run: echo "Test status is - ${{ needs.test.result }}"
+      - name: Check test matrix status
+        if: ${{ needs.test.result != 'success' && needs.test.result != 'skipped' }}
+        run: exit 1

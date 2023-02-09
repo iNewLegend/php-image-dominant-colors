@@ -1,15 +1,11 @@
 <?php
-require __DIR__ . '/../../src/boot.php';
+require __DIR__ . '/../../../src/boot.php';
 
 use File_Readers\Bitmap_File_Reader;
 
 ob_start();
 
-// $file =  __DIR__ . '/../../bitmaps_collection/1/cross.bmp';
-// $file = __DIR__ . '/../../bitmaps_collection/1/bottom_left.bmp';
- $file = __DIR__ . '/../../bitmaps_collection/1/pal1.bmp';
-// $file = __DIR__ . '/../../bitmaps_collection/1/paletted-image-with-2bits.bmp';
-
+ $file = __DIR__ . '/../../../bitmaps_collection/1/pal1.bmp';
 require __DIR__ . '/../shared.php';
 
 $reader = new Bitmap_File_Reader( $file );

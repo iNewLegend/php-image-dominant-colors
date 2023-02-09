@@ -1,10 +1,10 @@
 <?php
-require __DIR__ . '/../../src/boot.php';
+require __DIR__ . '/../../../src/boot.php';
 
 use Decoders\RLE4_Decoder;
 use File_Readers\Bitmap_File_Reader;
 
-$file = __DIR__ . '/../../bitmaps_collection/4/pal4-compressed-rle.bmp';
+$file = __DIR__ . '/../../../bitmaps_collection/4/pal4-compressed-rle.bmp';
 
 require __DIR__ . '/../shared.php';
 require __DIR__ . '/mike42/gfx-php/Rle4Decoder.php';
