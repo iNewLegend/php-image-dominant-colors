@@ -1,11 +1,11 @@
 <?php
-require __DIR__ . '/../../src/boot.php';
+require __DIR__ . '/../../../src/boot.php';
 
 use Decoders\RLE8_Decoder;
 use File_Readers\Bitmap_File_Reader;
 use Mike42\GfxPhp\Codec\Bmp\Rle8Decoder;
 
-$file = __DIR__ . '/../../bitmaps_collection/8/pal8-rle.bmp';
+$file = __DIR__ . '/../../../bitmaps_collection/8/pal8-rle.bmp';
 
 require __DIR__ . '/../shared.php';
 require __DIR__ . '/mike42/gfx-php/Rle8Decoder.php';

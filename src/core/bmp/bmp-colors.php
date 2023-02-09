@@ -263,7 +263,7 @@ function get_bmp_colors( Bitmap_File_Reader $file_reader): array {
 	$bits_per_pixel = $file_reader['bits_per_pixel'];
 
 	switch ( $bits_per_pixel->get_value() ) {
-		// Check research in `<project-root>/tests/1bpp/1bpp-test.php` for more info.
+		// Check research in `<project-root>/tests/manual/1bpp/1bpp-test.php` for more info.
 		case E_Bits_Per_Pixel::E_BPP_1:
 			$result = get_colors_binary_1bpp( $file_reader );
 			break;

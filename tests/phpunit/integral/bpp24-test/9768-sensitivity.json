@@ -1,0 +1,110 @@
+{
+	"success": true,
+	"statistics": [
+		{
+			"color": "FDB5F7",
+			"occurrence": 50,
+			"percentage": 0.013888888888888888
+		},
+		{
+			"color": "FFABF6",
+			"occurrence": 48,
+			"percentage": 0.013333333333333334
+		},
+		{
+			"color": "FFBAF9",
+			"occurrence": 44,
+			"percentage": 0.012222222222222221
+		},
+		{
+			"color": "FFB4F5",
+			"occurrence": 44,
+			"percentage": 0.012222222222222221
+		},
+		{
+			"color": "FFB9F8",
+			"occurrence": 41,
+			"percentage": 0.01138888888888889
+		},
+		{
+			"color": "FFADF5",
+			"occurrence": 41,
+			"percentage": 0.01138888888888889
+		},
+		{
+			"color": "FFAFF4",
+			"occurrence": 40,
+			"percentage": 0.011111111111111112
+		},
+		{
+			"color": "FDB6F8",
+			"occurrence": 40,
+			"percentage": 0.011111111111111112
+		},
+		{
+			"color": "FDA9F4",
+			"occurrence": 40,
+			"percentage": 0.011111111111111112
+		},
+		{
+			"color": "FFA8F6",
+			"occurrence": 39,
+			"percentage": 0.010833333333333334
+		},
+		{
+			"color": "FCB4F6",
+			"occurrence": 39,
+			"percentage": 0.010833333333333334
+		},
+		{
+			"color": "FFACF7",
+			"occurrence": 38,
+			"percentage": 0.010555555555555556
+		},
+		{
+			"color": "FDA6F4",
+			"occurrence": 37,
+			"percentage": 0.010277777777777778
+		},
+		{
+			"color": "FFB8FA",
+			"occurrence": 36,
+			"percentage": 0.01
+		},
+		{
+			"color": "FEAAF7",
+			"occurrence": 36,
+			"percentage": 0.01
+		},
+		{
+			"color": "FDADF2",
+			"occurrence": 36,
+			"percentage": 0.01
+		},
+		{
+			"color": "FFB8FF",
+			"occurrence": 34,
+			"percentage": 0.009444444444444445
+		},
+		{
+			"color": "FFB2FA",
+			"occurrence": 34,
+			"percentage": 0.009444444444444445
+		},
+		{
+			"color": "FFB1F6",
+			"occurrence": 34,
+			"percentage": 0.009444444444444445
+		},
+		{
+			"color": "FCACF3",
+			"occurrence": 34,
+			"percentage": 0.009444444444444445
+		}
+	],
+	"general_settings": {
+		"total_colors_count": 360000,
+		"unique_colors_count": 200379,
+		"displayed_colors_count": 20
+	}
+}

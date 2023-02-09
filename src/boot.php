@@ -12,9 +12,11 @@ spl_autoload_register( function ( $class ) {
 
 	$class_lowercase = str_replace( '_', '-', $class_lowercase );
 
-	$class_path = __DIR__ . '/'. str_replace( '\\', '/', $class_lowercase ) . '.php';
+	$class_file = __DIR__ . '/'. str_replace( '\\', '/', $class_lowercase ) . '.php';
 
-	require_once $class_path;
+	if ( is_file( $class_file ) ) {
+		require_once $class_file;
+	}
 } );
 
 require_once __DIR__ . '/core/bmp/bmp-statistics.php';

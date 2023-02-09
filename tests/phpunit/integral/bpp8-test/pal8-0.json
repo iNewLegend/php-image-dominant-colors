@@ -1,0 +1,110 @@
+{
+	"success": true,
+	"statistics": [
+		{
+			"color": "000000",
+			"occurrence": 940,
+			"percentage": 11.56496062992126
+		},
+		{
+			"color": "998099",
+			"occurrence": 619,
+			"percentage": 7.615649606299213
+		},
+		{
+			"color": "FFFFFF",
+			"occurrence": 485,
+			"percentage": 5.967027559055118
+		},
+		{
+			"color": "665566",
+			"occurrence": 472,
+			"percentage": 5.807086614173229
+		},
+		{
+			"color": "668099",
+			"occurrence": 445,
+			"percentage": 5.47490157480315
+		},
+		{
+			"color": "99AA99",
+			"occurrence": 279,
+			"percentage": 3.4325787401574805
+		},
+		{
+			"color": "668066",
+			"occurrence": 252,
+			"percentage": 3.100393700787402
+		},
+		{
+			"color": "99AACC",
+			"occurrence": 185,
+			"percentage": 2.2760826771653546
+		},
+		{
+			"color": "CCD5CC",
+			"occurrence": 175,
+			"percentage": 2.153051181102362
+		},
+		{
+			"color": "332B33",
+			"occurrence": 138,
+			"percentage": 1.6978346456692914
+		},
+		{
+			"color": "CCAACC",
+			"occurrence": 85,
+			"percentage": 1.045767716535433
+		},
+		{
+			"color": "66D566",
+			"occurrence": 66,
+			"percentage": 0.8120078740157479
+		},
+		{
+			"color": "99D599",
+			"occurrence": 62,
+			"percentage": 0.7627952755905512
+		},
+		{
+			"color": "002B00",
+			"occurrence": 62,
+			"percentage": 0.7627952755905512
+		},
+		{
+			"color": "CC2BCC",
+			"occurrence": 59,
+			"percentage": 0.7258858267716536
+		},
+		{
+			"color": "662B66",
+			"occurrence": 59,
+			"percentage": 0.7258858267716536
+		},
+		{
+			"color": "33D533",
+			"occurrence": 59,
+			"percentage": 0.7258858267716536
+		},
+		{
+			"color": "CCD533",
+			"occurrence": 57,
+			"percentage": 0.7012795275590551
+		},
+		{
+			"color": "665533",
+			"occurrence": 55,
+			"percentage": 0.6766732283464567
+		},
+		{
+			"color": "335566",
+			"occurrence": 55,
+			"percentage": 0.6766732283464567
+		}
+	],
+	"general_settings": {
+		"total_colors_count": 8128,
+		"unique_colors_count": 151,
+		"displayed_colors_count": 20
+	}
+}

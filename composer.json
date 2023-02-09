@@ -1,0 +1,10 @@
+{
+    "require-dev": {
+        "phpunit/phpunit": "^10"
+    },
+	"scripts": {
+		"test": [
+			"php tests/phpunit/bootstrap.php integral"
+		]
+	}
+}

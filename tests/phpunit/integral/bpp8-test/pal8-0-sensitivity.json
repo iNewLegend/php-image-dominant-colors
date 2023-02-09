@@ -1,0 +1,115 @@
+{
+	"success": true,
+	"statistics": [
+		{
+			"color": "000019",
+			"occurrence": 981,
+			"percentage": 12.069389763779528
+		},
+		{
+			"color": "998099",
+			"occurrence": 619,
+			"percentage": 7.615649606299213
+		},
+		{
+			"color": "FFFFFF",
+			"occurrence": 485,
+			"percentage": 5.967027559055118
+		},
+		{
+			"color": "4C407F",
+			"occurrence": 472,
+			"percentage": 5.807086614173229
+		},
+		{
+			"color": "4C6A99",
+			"occurrence": 448,
+			"percentage": 5.511811023622047
+		},
+		{
+			"color": "99AA99",
+			"occurrence": 279,
+			"percentage": 3.4325787401574805
+		},
+		{
+			"color": "4C6A66",
+			"occurrence": 252,
+			"percentage": 3.100393700787402
+		},
+		{
+			"color": "4C2B33",
+			"occurrence": 188,
+			"percentage": 2.312992125984252
+		},
+		{
+			"color": "99AACC",
+			"occurrence": 185,
+			"percentage": 2.2760826771653546
+		},
+		{
+			"color": "CCD5CC",
+			"occurrence": 175,
+			"percentage": 2.153051181102362
+		},
+		{
+			"color": "19D519",
+			"occurrence": 109,
+			"percentage": 1.3410433070866141
+		},
+		{
+			"color": "19D5CC",
+			"occurrence": 86,
+			"percentage": 1.0580708661417324
+		},
+		{
+			"color": "4C004C",
+			"occurrence": 85,
+			"percentage": 1.045767716535433
+		},
+		{
+			"color": "CCAACC",
+			"occurrence": 85,
+			"percentage": 1.045767716535433
+		},
+		{
+			"color": "4C0000",
+			"occurrence": 84,
+			"percentage": 1.033464566929134
+		},
+		{
+			"color": "004000",
+			"occurrence": 84,
+			"percentage": 1.033464566929134
+		},
+		{
+			"color": "4C2B66",
+			"occurrence": 74,
+			"percentage": 0.9104330708661417
+		},
+		{
+			"color": "19AA99",
+			"occurrence": 73,
+			"percentage": 0.8981299212598425
+		},
+		{
+			"color": "4CBF4C",
+			"occurrence": 66,
+			"percentage": 0.8120078740157479
+		},
+		{
+			"color": "4C2B00",
+			"occurrence": 66,
+			"percentage": 0.8120078740157479
+		}
+	],
+	"general_settings": {
+		"total_colors_count": 8128,
+		"unique_colors_count": 151,
+		"displayed_colors_count": 20
+	},
+	"merge_settings": {
+		"total_count": 4249,
+		"total_unique_merged_count": 48,
+		"unique_colors_count": 103
+	}
+}
