@@ -1,0 +1,110 @@
+{
+	"success": true,
+	"statistics": [
+		{
+			"color": "9E0142FF",
+			"occurrence": 1096,
+			"percentage": 10.81081081081081
+		},
+		{
+			"color": "F46D43FF",
+			"occurrence": 959,
+			"percentage": 9.45945945945946
+		},
+		{
+			"color": "D53E4FFF",
+			"occurrence": 959,
+			"percentage": 9.45945945945946
+		},
+		{
+			"color": "66C2A5FF",
+			"occurrence": 959,
+			"percentage": 9.45945945945946
+		},
+		{
+			"color": "5E4FA2FF",
+			"occurrence": 959,
+			"percentage": 9.45945945945946
+		},
+		{
+			"color": "3288BDFF",
+			"occurrence": 959,
+			"percentage": 9.45945945945946
+		},
+		{
+			"color": "FDAE61FF",
+			"occurrence": 939,
+			"percentage": 9.262181889919116
+		},
+		{
+			"color": "ABDDA4FF",
+			"occurrence": 929,
+			"percentage": 9.163543105148944
+		},
+		{
+			"color": "E6F598FF",
+			"occurrence": 900,
+			"percentage": 8.877490629315448
+		},
+		{
+			"color": "FEE08BFF",
+			"occurrence": 898,
+			"percentage": 8.857762872361413
+		},
+		{
+			"color": "FDAC60FF",
+			"occurrence": 140,
+			"percentage": 1.3809429867824028
+		},
+		{
+			"color": "5460AAFF",
+			"occurrence": 137,
+			"percentage": 1.3513513513513513
+		},
+		{
+			"color": "B5E1A2FF",
+			"occurrence": 128,
+			"percentage": 1.2625764450581969
+		},
+		{
+			"color": "FFE087FF",
+			"occurrence": 10,
+			"percentage": 0.09863878477017164
+		},
+		{
+			"color": "F4FAD7FF",
+			"occurrence": 10,
+			"percentage": 0.09863878477017164
+		},
+		{
+			"color": "E3E8C5FF",
+			"occurrence": 8,
+			"percentage": 0.0789110278161373
+		},
+		{
+			"color": "B8E5B2FF",
+			"occurrence": 6,
+			"percentage": 0.05918327086210298
+		},
+		{
+			"color": "A3ACA2FF",
+			"occurrence": 6,
+			"percentage": 0.05918327086210298
+		},
+		{
+			"color": "78756AFF",
+			"occurrence": 6,
+			"percentage": 0.05918327086210298
+		},
+		{
+			"color": "D5CDB8FF",
+			"occurrence": 5,
+			"percentage": 0.04931939238508582
+		}
+	],
+	"general_settings": {
+		"total_colors_count": 10138,
+		"unique_colors_count": 77,
+		"displayed_colors_count": 20
+	}
+}

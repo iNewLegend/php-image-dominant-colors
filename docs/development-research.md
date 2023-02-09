@@ -739,7 +739,7 @@ execution time `3.7468149662017822`
 ## 1 bit
 ![](img_3.png)
 
-- Research: [test](../tests/1bpp/)
+- Research: [test](../tests/manual/1bpp/)
 
 #### Color palette support for 1-bit images:
 ![](img_4.png)

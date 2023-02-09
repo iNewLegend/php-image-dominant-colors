@@ -1,0 +1,20 @@
+{
+	"success": true,
+	"statistics": [
+		{
+			"color": "000000",
+			"occurrence": 5792,
+			"percentage": 70.703125
+		},
+		{
+			"color": "FFFFFF",
+			"occurrence": 2400,
+			"percentage": 29.296875
+		}
+	],
+	"general_settings": {
+		"total_colors_count": 8192,
+		"unique_colors_count": 2,
+		"displayed_colors_count": 2
+	}
+}

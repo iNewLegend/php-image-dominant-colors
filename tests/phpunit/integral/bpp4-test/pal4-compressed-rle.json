@@ -1,0 +1,75 @@
+{
+	"success": true,
+	"statistics": [
+		{
+			"color": "000000",
+			"occurrence": 2433,
+			"percentage": 29.933562992125985
+		},
+		{
+			"color": "008000",
+			"occurrence": 2303,
+			"percentage": 28.33415354330709
+		},
+		{
+			"color": "FF80FF",
+			"occurrence": 681,
+			"percentage": 8.378444881889765
+		},
+		{
+			"color": "FFFFFF",
+			"occurrence": 583,
+			"percentage": 7.172736220472441
+		},
+		{
+			"color": "8000FF",
+			"occurrence": 416,
+			"percentage": 5.118110236220472
+		},
+		{
+			"color": "0080FF",
+			"occurrence": 345,
+			"percentage": 4.244586614173229
+		},
+		{
+			"color": "FF8000",
+			"occurrence": 237,
+			"percentage": 2.9158464566929134
+		},
+		{
+			"color": "00FF00",
+			"occurrence": 237,
+			"percentage": 2.9158464566929134
+		},
+		{
+			"color": "FFFF00",
+			"occurrence": 227,
+			"percentage": 2.7928149606299213
+		},
+		{
+			"color": "00FFFF",
+			"occurrence": 177,
+			"percentage": 2.1776574803149606
+		},
+		{
+			"color": "FF00FF",
+			"occurrence": 171,
+			"percentage": 2.1038385826771653
+		},
+		{
+			"color": "FF0000",
+			"occurrence": 165,
+			"percentage": 2.03001968503937
+		},
+		{
+			"color": "0000FF",
+			"occurrence": 153,
+			"percentage": 1.8823818897637796
+		}
+	],
+	"general_settings": {
+		"total_colors_count": 8128,
+		"unique_colors_count": 13,
+		"displayed_colors_count": 13
+	}
+}
