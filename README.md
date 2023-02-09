@@ -8,6 +8,9 @@
 ### Frontend preview
 ![](./docs/preview_1.png)
 
+### Live demo
+http://inewlegend.com/php-image-dominant-colors/public/
+
 ## Installation
 
 Clone the repo
