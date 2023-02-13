@@ -19,6 +19,30 @@ const DEFAULT_TARGET = '';
 
 $target = $_SERVER['argv'][1] ?? DEFAULT_TARGET;
 
+// Read filter.
+$suffix_key = array_search( '--test-suffix', $_SERVER['argv'] );
+
+// Add manual support for `--test-suffix`.
+if ( $suffix_key ) {
+	$test_suffix = [
+		'file' => $_SERVER['argv'][ $suffix_key + 1 ],
+		'path' => $_SERVER['argv'][ $suffix_key + 2 ],
+	];
+
+	$target = basename($test_suffix['path']);
+}
+
+// Add manual support for `--filter`.
+$filter_key = array_search( '--filter', $_SERVER['argv'] );
+
+if ( $filter_key ) {
+	$test_filter = $_SERVER['argv'][ $filter_key + 1 ];
+
+	$test_filter_factory =  new \PHPUnit\Runner\Filter\Factory();
+
+	$test_filter_factory->addNameFilter( $test_filter );
+}
+
 switch ( $target ) {
 	case 'integral':
 		break;
@@ -61,11 +85,19 @@ foreach ( $files as $file ) {
 		continue;
 	}
 
+	if ( isset( $test_suffix['file'] ) && $file->getFilename() !== $test_suffix['file'] ) {
+		continue;
+	}
+
 	if ( ! preg_match( '/test\.php$/', $file->getFilename() ) ) {
 		continue;
 	}
 
 	$test_suite->addTestFile( $file->getRealPath() );
+
+	if ( isset( $test_filter_factory ) ) {
+		$test_suite->injectFilter( $test_filter_factory );
+	}
 }
 
 // Clear memory.
