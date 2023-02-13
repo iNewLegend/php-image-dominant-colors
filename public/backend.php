@@ -1,8 +1,6 @@
 <?php
 /**
  * @author Leonid Vinikov <leonidvinikov@gmail.com>
- *
- * Minimum PHP version: 7.4
  */
 require_once __DIR__ . '/../src/boot.php';
 
@@ -24,13 +22,14 @@ function get_file_statistics( Base_File_Reader $file_reader ): array {
 
 	$args = array_merge( $args, $_POST );
 
-	switch ( $file_reader->get_file_extension() ) {
+	switch ( $file_reader->get_signature()->get_file_extension() ) {
 		case 'bmp':
+			/** @var Bitmap_File_Reader $file_reader */
 			$result = get_bmp_statistics( $file_reader, $args );
 			break;
 
 		default:
-			$result['message'] = 'Unsupported file type: ' . $file_reader->get_file_extension();
+			$result['message'] = 'Unsupported file type';
 			break;
 	}
 
@@ -44,6 +43,7 @@ function handle_file( $file_data ): array {
 	switch ( $file_data['type'] ) {
 		case 'image/bmp':
 			$file_reader = new Bitmap_File_Reader( $file_data['tmp_name'] );
+			break;
 
 			break;
 

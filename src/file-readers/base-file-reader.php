@@ -6,26 +6,28 @@
 namespace File_Readers;
 
 use Exception;
+use File_Readers\Signatures\Base_Signature;
 
 abstract class Base_File_Reader implements \ArrayAccess {
 	private string $file_path;
-
 	private array $file_stats;
-
 	private mixed $file_handler;
 
 	private array $args;
+
+	private array $user_data = [];
+
+	private Base_Signature $signature;
 
 	protected bool $is_data_read = false;
 
 	protected int $offset = 0;
 
-	private array $user_data = [];
-
 	public function __construct( $file_path, $args = [] ) {
 		$this->file_path = $file_path;
 
 		$this->args = array_merge( $this->get_default_args(), $args );
+		$this->signature = new ($this->get_signature_class());
 	}
 
 	public function open(): bool {
@@ -35,8 +37,8 @@ abstract class Base_File_Reader implements \ArrayAccess {
 			return false;
 		}
 
-		if ( ! $this->validate_header() ) {
-			throw new Exception( 'Invalid file header.' );
+		if ( ! $this->validate_signature() ) {
+			throw new Exception( 'Invalid file signature.' );
 		}
 
 		$this->file_stats = fstat( $this->file_handler );
@@ -62,6 +64,10 @@ abstract class Base_File_Reader implements \ArrayAccess {
 		return $this->user_data;
 	}
 
+	public function get_signature(): Base_Signature {
+		return $this->signature;
+	}
+
 	#[\ReturnTypeWillChange]
 	public function offsetExists( $offset ): bool {
 		$this->ensure_data_get();
@@ -85,8 +91,6 @@ abstract class Base_File_Reader implements \ArrayAccess {
 	public function offsetUnset( $offset ) {
 		$this->method_is_read_only();
 	}
-
-	abstract public function get_file_extension(): string;
 
 	abstract public function read_data(): void;
 
@@ -127,11 +131,17 @@ abstract class Base_File_Reader implements \ArrayAccess {
 		return unpack( "C$length", $bytes );
 	}
 
+	abstract protected function get_signature_class(): string;
+
 	abstract protected function get_default_args(): array;
 
 	abstract protected function get_user_data(): array;
 
-	abstract protected function validate_header(): bool;
+	private function validate_signature(): bool {
+		$signature = $this->get_signature();
+
+		return $signature->get_magic_number() === bin2hex( $this->read( $signature->get_magic_number_length() ));
+	}
 
 	private function ensure_file_read() {
 		if ( ! $this->is_data_read ) {

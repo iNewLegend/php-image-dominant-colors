@@ -12,12 +12,7 @@ use Enums\E_Compressions;
 use Exception;
 
 class Bitmap_File_Reader extends Base_File_Reader {
-	const FILE_EXTENSION = 'bmp';
-
-	const FILE_HEADER_MAGIC_NUMBER = '424d';
-	const FILE_HEADER_SIZE = 14;
-	const FILE_HEADER_INFO_SIZE = 40;
-
+	const WINDOWS_HEADER_SIZE = 14;
 	const WINDOWS_COLORS_SIZE = 4;
 
 	const OS21X_HEADER_SIZE = 12;
@@ -118,12 +113,8 @@ class Bitmap_File_Reader extends Base_File_Reader {
 		$this->is_data_read = true;
 	}
 
-	public function get_file_extension(): string {
-		return self::FILE_EXTENSION;
-	}
-
-	public function validate_header(): bool {
-		return self::FILE_HEADER_MAGIC_NUMBER === bin2hex( $this->read( 2 ) );
+	protected function get_signature_class(): string {
+		return Signatures\Bitmap_Signature::class;
 	}
 
 	protected function get_default_args(): array {
@@ -193,7 +184,7 @@ class Bitmap_File_Reader extends Base_File_Reader {
 		if ( $this->bits_per_pixel->less_then( E_Bits_Per_Pixel::E_BPP_24 ) ) {
 			$colors_count = $this->colors_used;
 
-			$osx_header_size_calc = self::OS21X_HEADER_SIZE + self::FILE_HEADER_SIZE;
+			$osx_header_size_calc = self::OS21X_HEADER_SIZE + self::WINDOWS_HEADER_SIZE;
 
 			// Validate whatever we deal with OSX or Windows BMP.
 			$is_osx_header = $this->info_header_size === self::OS21X_HEADER_SIZE;
@@ -205,7 +196,7 @@ class Bitmap_File_Reader extends Base_File_Reader {
 			}
 
 			// Windows header.
-			$win_header_size_calc = $this->info_header_size + self::FILE_HEADER_SIZE;
+			$win_header_size_calc = $this->info_header_size + self::WINDOWS_HEADER_SIZE;
 
 			for( $i = 0; $i < $colors_count; $i++ ) {
 				$chunk = $this->read_bytes( self::WINDOWS_COLORS_SIZE );
