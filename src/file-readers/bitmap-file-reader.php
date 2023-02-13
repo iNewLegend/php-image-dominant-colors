@@ -10,7 +10,6 @@ use Enums\E_Bits_Per_Pixel;
 use Enums\E_Bytes_Per_BPP;
 use Enums\E_Compressions;
 use Exception;
-use File_Readers\Args\Bitmap_Reader_Args;
 
 class Bitmap_File_Reader extends Base_File_Reader {
 	const FILE_EXTENSION = 'bmp';
@@ -127,8 +126,12 @@ class Bitmap_File_Reader extends Base_File_Reader {
 		return self::FILE_HEADER_MAGIC_NUMBER === bin2hex( $this->read( 2 ) );
 	}
 
-	protected function get_args_class(): string {
-		return Bitmap_Reader_Args::class;
+	protected function get_default_args(): array {
+		return [
+			'bypass_compression_check' => false,    // Bypass the compression check.
+			'bypass_colors_used_check' => true,     // Bypass the colors used check, if not `colors_used` is negative.
+			'get_file_size_manually' => true,       // Get the file size manually, if the file size is not available.
+		];
 	}
 
 	protected function get_user_data(): array {
@@ -244,5 +247,4 @@ class Bitmap_File_Reader extends Base_File_Reader {
 				break;
 		}
 	}
-
 }

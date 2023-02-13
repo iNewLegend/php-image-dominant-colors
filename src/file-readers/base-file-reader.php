@@ -6,7 +6,6 @@
 namespace File_Readers;
 
 use Exception;
-use Utils\Args_Object;
 
 abstract class Base_File_Reader implements \ArrayAccess {
 	private string $file_path;
@@ -15,7 +14,7 @@ abstract class Base_File_Reader implements \ArrayAccess {
 
 	private mixed $file_handler;
 
-	private Args_Object $args;
+	private array $args;
 
 	protected bool $is_data_read = false;
 
@@ -26,9 +25,7 @@ abstract class Base_File_Reader implements \ArrayAccess {
 	public function __construct( $file_path, $args = [] ) {
 		$this->file_path = $file_path;
 
-		$class_name = $this->get_args_class();
-
-		$this->args = new $class_name( $args );
+		$this->args = array_merge( $this->get_default_args(), $args );
 	}
 
 	public function open(): bool {
@@ -108,7 +105,7 @@ abstract class Base_File_Reader implements \ArrayAccess {
 		return $this->file_stats['size'];
 	}
 
-	protected function get_args(): Args_Object {
+	protected function get_args(): array {
 		return $this->args;
 	}
 
@@ -130,7 +127,7 @@ abstract class Base_File_Reader implements \ArrayAccess {
 		return unpack( "C$length", $bytes );
 	}
 
-	abstract protected function get_args_class(): string;
+	abstract protected function get_default_args(): array;
 
 	abstract protected function get_user_data(): array;
 
