@@ -33,7 +33,7 @@ $ ./run
 
 ---
 
-- In cast you need performance, you can use
+- In case you need performance, you can use
 ```shell
 $ ./run_optimized
 ```
