@@ -9,7 +9,8 @@
 ![](./docs/preview_1.png)
 
 ### Live demo
-http://inewlegend.com/php-image-dominant-colors/public/
+[http://inewlegend.com/php-image-dominant-colors/public/
+](https://inewlegend.com/projects/php-image-dominant-colors/public/index.html)
 
 ## Installation
 
